@@ -100,4 +100,33 @@ public class RootShell {
             }
         }
     }
+	
+	//TODO check
+	public static void handleOutput(){
+	        try {
+            int BUFF_LEN = 1024;
+            Process p = Runtime.getRuntime().exec(new String[] { "su", "-c", "system/bin/sh" });
+            DataOutputStream stdin = new DataOutputStream(p.getOutputStream());
+            // from here all commands are executed with su permissions
+            stdin.writeBytes("ls /data\n"); // \n executes the command
+            InputStream stdout = p.getInputStream();
+            byte[] buffer = new byte[BUFF_LEN];
+            int read;
+            String out = new String();
+            // read method will wait forever if there is nothing in the stream
+            // so we need to read it in another way than
+            // while((read=stdout.read(buffer))>0)
+            while (true) {
+                read = stdout.read(buffer);
+                out += new String(buffer, 0, read);
+                if (read < BUFF_LEN) {
+                    // we have read everything
+                    break;
+                }
+            }
+            Log.e("ROOT", out);
+        } catch (Exception e) {
+            Log.e("ROOT", "Error", e);
+        }
+	}
 }
