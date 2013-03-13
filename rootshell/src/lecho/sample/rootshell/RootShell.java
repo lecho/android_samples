@@ -2,6 +2,7 @@ package lecho.sample.rootshell;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import android.util.Log;
@@ -100,15 +101,16 @@ public class RootShell {
             }
         }
     }
-	
-	//TODO check
-	public static void handleOutput(){
-	        try {
+
+    // run command with su rights and return output of that command(inside su
+    // shell)
+    public static void suOutputExecute(String command) {
+        try {
             int BUFF_LEN = 1024;
             Process p = Runtime.getRuntime().exec(new String[] { "su", "-c", "system/bin/sh" });
             DataOutputStream stdin = new DataOutputStream(p.getOutputStream());
             // from here all commands are executed with su permissions
-            stdin.writeBytes("ls /data\n"); // \n executes the command
+            stdin.writeBytes(command + "\n"); // \n executes the command
             InputStream stdout = p.getInputStream();
             byte[] buffer = new byte[BUFF_LEN];
             int read;
@@ -124,9 +126,37 @@ public class RootShell {
                     break;
                 }
             }
+            stdout.close();
             Log.e("ROOT", out);
+            p.waitFor();
         } catch (Exception e) {
             Log.e("ROOT", "Error", e);
         }
-	}
+    }
+
+    /**
+     * Copy busybox binaries to /data/data/lecho.sample.rootshel and set x
+     * permission
+     * 
+     * @param command
+     *            for example /data/data/my.app/files/busybox ping -4 8.8.8.8
+     */
+    public static void busyboxExecute(String command) {
+        try {
+            int BUFF_LEN = 1024;
+            Process p = Runtime.getRuntime().exec(command);
+            BufferedReader stdout = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            char[] buffer = new char[BUFF_LEN];
+            int read;
+            StringBuilder out = new StringBuilder();
+            while ((read = stdout.read(buffer)) > 0) {
+                out.append(buffer, 0, read);
+            }
+            stdout.close();
+            Log.e("ROOT", out.toString());
+            p.waitFor();
+        } catch (Exception e) {
+            Log.e("ROOT", "Error", e);
+        }
+    }
 }

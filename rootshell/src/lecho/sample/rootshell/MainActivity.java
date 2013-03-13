@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
 //TODO check roottools http://code.google.com/p/roottools/
 public class MainActivity extends Activity {
 
@@ -29,6 +30,27 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 RootShell.suExecute(new String[] { edit.getText().toString() });
+
+            }
+        });
+
+        final Button suOut = (Button) findViewById(R.id.su_output_button);
+        suOut.setOnClickListener(new Button.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                RootShell.suOutputExecute(edit.getText().toString());
+
+            }
+        });
+
+        final Button busybox = (Button) findViewById(R.id.busybox_button);
+        busybox.setOnClickListener(new Button.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                String s = getFilesDir() + "/busybox --list";
+                RootShell.busyboxExecute(s);
 
             }
         });

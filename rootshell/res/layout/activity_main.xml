@@ -18,4 +18,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="SU shell" />
+    <Button
+        android:id="@+id/su_output_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SU output" />
+    <Button
+        android:id="@+id/busybox_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Busybox" />
 </LinearLayout>
