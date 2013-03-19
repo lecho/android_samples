@@ -24,10 +24,10 @@ public class RootShell {
             // Acquire shell - no root
             Log.i("RootShell", "Starting exec of sh");
             shell = Runtime.getRuntime().exec("sh");
-            // Create stream for root shell
+            // Create stream for sh shell
             out = new DataOutputStream(shell.getOutputStream());
 
-            // Executing commands with root rights
+            // Executing commands without root rights
             Log.i(LOG_TAG, "Executing commands...");
             for (String command : commands) {
                 Log.i(LOG_TAG, "Executing: " + command);
@@ -40,7 +40,7 @@ public class RootShell {
             shell.waitFor();
 
         } catch (Exception e) {
-            Log.d(LOG_TAG, "ShellRoot#suExecute() finished with error", e);
+            Log.e(LOG_TAG, "ShellRoot#shExecute() finished with error", e);
         } finally {
             try {
                 if (out != null) {
