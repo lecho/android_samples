@@ -1,0 +1,21 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity" >
+    <lecho.sample.zoomtextview.view.CustomScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true" >
+        <lecho.sample.zoomtextview.view.ZoomTextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="The new Developer Console brings you new functionality built on top of a quick-to-navigate user experience. You can add language-specific graphics to your store listing to help your users around the world understand what your app is about. New graphs let you track your ratings over time with breakdowns by device, country, app version, and more. The statistics page now shows you when you released each version of your app, so you see how each new version changes your installations and ratings, and you can view crashes specific to an application version. These new features are only the beginning of what’s to come for developers on Google Play in the future."
+            android:textSize="16sp" />
+    </lecho.sample.zoomtextview.view.CustomScrollView>
+</RelativeLayout>
