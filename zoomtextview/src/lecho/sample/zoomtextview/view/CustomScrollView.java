@@ -18,10 +18,6 @@ public class CustomScrollView extends ScrollView {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        if (ev.getPointerCount() > 1) {
-            // Two fingers case - pinch
-            return false;
-        }
         return super.onInterceptTouchEvent(ev) && mGestureDetector.onTouchEvent(ev);
     }
 
