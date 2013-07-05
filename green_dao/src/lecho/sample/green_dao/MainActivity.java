@@ -24,8 +24,8 @@ import android.widget.TextView;
  * Example of loading one-to-many relation with GreenDao within single
  * AsyncTaskLoader and displaying content on single layout.
  * 
- * - no cascade operations support:( - no toString, hashCode, equals generated
- * by generator - no eager loading for one-to-many and many-to-many
+ * - no cascade operations support:(; - no toString, hashCode, equals generated
+ * by generator; - no eager loading for one-to-many and many-to-many; - no many-to-many relations support!!!
  * 
  * @author Leszek
  * 
